@@ -1,0 +1,4 @@
+Union:[ a b c d e g ]
+Intersection:[ a b c d e ]
+Difference:[ g ]
+Custom:[ g j ]
