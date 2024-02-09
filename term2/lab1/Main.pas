@@ -1,7 +1,6 @@
 ﻿program Main;
 
-uses UnitStandartSet;
-
+uses UnitBooleanArraySet;
 var
   A, B, C, R: TCharSet;
   fin, fout: TextFile;
