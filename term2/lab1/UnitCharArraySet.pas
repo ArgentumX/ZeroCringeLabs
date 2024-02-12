@@ -108,7 +108,7 @@ var
   i: Integer;
 begin
   res := '[';
-  for i := 33 to 255 do
+  for i := 48 to 122 do
   begin
     if Contains(x, chr(i)) then
     begin

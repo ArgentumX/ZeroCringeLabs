@@ -3,7 +3,7 @@
 interface
 
 const
-  ALPHABET_SIZE = 52;
+  ALPHABET_SIZE = 62;
 
 type
   TCharSet = array[1..ALPHABET_SIZE] of Boolean;
@@ -24,8 +24,9 @@ var
   res: Integer;
 begin
   case ord(ch) of
-    65..90: res := ord(ch) - ord('A');
-    97..122: res := ord(ch) - (ord('A') + 6)
+    48..57: res := ord(ch) - ord('0');
+    65..90: res := ord(ch) - (ord('0') + 7);
+    97..122: res := ord(ch) - (ord('0') + 13)
   else
     
   end;
@@ -37,8 +38,9 @@ var
   trueIndexRes: Integer;
 begin
   case index of
-    1..26: trueIndexRes := ord('A') + index;
-    27..52: trueIndexRes := ord('A') + 6 + index
+    1..10: trueIndexRes := ord('0') + index;
+    11..36: trueIndexRes := ord('0') + index + 7;
+    37..62: trueIndexRes := ord('0') + index + 13
   else
     
   end;

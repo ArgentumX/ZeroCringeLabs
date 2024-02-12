@@ -1,10 +1,22 @@
 ﻿program Main;
 
-uses UnitBooleanArraySet;
+uses UnitStandartSet;
+
+procedure ReadSet(var fin: TextFile; var X: TCharSet);
+var ch: Char;
+begin
+    Init(X);
+    while not eoln(fin) do
+    begin
+      read(fin, ch);
+      Add(X, ch);
+    end;
+    readln(fin);
+end;
+
 var
-  A, B, C, R: TCharSet;
-  fin, fout: TextFile;
-  ch: Char;
+  A, B, C: TCharSet;
+  f: TextFile;
 begin
   if ParamCount < 2 then begin
     writeln('Недостаточно параметров!');
@@ -17,44 +29,22 @@ begin
     end
     else
     begin
-      AssignFile(fin, ParamStr(1));
-      Reset(fin);
-      AssignFile(fout, ParamStr(2));
-      Rewrite(fout);
-      
       { Reading of sets }
-      Init(A);
-      while not eoln(fin) do
-      begin
-        read(fin, ch);
-        Add(A, ch);
-      end;
-      readln(fin);
-      Init(B);
-      while not eoln(fin) do
-      begin
-        read(fin, ch);
-        Add(B, ch);
-      end;
-      readln(fin);
-      Init(C);
-      while not eoln(fin) do
-      begin
-        read(fin, ch);
-        Add(C, ch);
-      end;
-      CloseFile(fin);
+      AssignFile(f, ParamStr(1));
+      Reset(f);
+      ReadSet(f, A);
+      ReadSet(f, B);
+      ReadSet(f, C);
+      CloseFile(f);
       
       { Calculating and saving of results}
-      R := Union(A, B);
-      writeln(fout, 'Union:', ToString(R));
-      R := Intersection(A, B);
-      writeln(fout, 'Intersection:', ToString(R));
-      R := Difference(A, B);
-      writeln(fout, 'Difference:', ToString(R));
-      R := Union(Difference(A, B), Difference(C, A));
-      writeln(fout, 'Custom:', ToString(R));
-      CloseFile(fout);
+      AssignFile(f, ParamStr(2));
+      Rewrite(f);
+      writeln(f, 'Union:', ToString(Union(A, B)));
+      writeln(f, 'Intersection:', ToString(Intersection(A, B)));
+      writeln(f, 'Difference:', ToString(Difference(A, B)));
+      writeln(f, 'Custom:', ToString(Union(Difference(A, B), Difference(C, A))));
+      CloseFile(f);
     end;
   end;
 
