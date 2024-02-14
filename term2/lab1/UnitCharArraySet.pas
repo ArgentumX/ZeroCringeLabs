@@ -108,7 +108,7 @@ var
   i: Integer;
 begin
   res := '[';
-  for i := 48 to 122 do
+  for i := ord('0') to ord('z') do
   begin
     if Contains(x, chr(i)) then
     begin
