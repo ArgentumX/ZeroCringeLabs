@@ -10,12 +10,9 @@ type
 
 procedure Init(var x: TCharSet);
 procedure Add(var x: TCharSet; ch: Char);
+procedure Remove(var x: TCharSet; ch: Char);
 
-function Union(const x, y: TCharSet): TCharSet;
-function Intersection(const x, y: TCharSet): TCharSet;
-function Difference(const x, y: TCharSet): TCharSet;
-function Contains(const x: TCharSet; const ch: Char): Boolean;
-function ToString(const x: TCharSet): String;
+function Contains(const x: TCharSet; ch: Char): Boolean;
 
 implementation 
 
@@ -47,7 +44,7 @@ begin
   GetCharByIndex := chr(trueIndexRes - 1);
 end;
 
-procedure Init(var X: TCharSet);
+procedure Init(var x: TCharSet);
 var
   i: Integer;
 begin
@@ -57,79 +54,19 @@ begin
   end;
 end;
 
-procedure Add(var X: TCharSet; ch: Char);
+procedure Add(var x: TCharSet; ch: Char);
 begin
-  X[GetCharIndex(ch)] := True;
+  x[GetCharIndex(ch)] := True;
 end;
 
-function Union(const X, Y: TCharSet): TCharSet;
-var
-  res: TCharSet;
-  i: Integer;
+procedure Remove(var x: TCharSet; ch: Char);
 begin
-  Init(res);
-  for i := 1 to ALPHABET_SIZE do
-  begin
-    if ((X[i] = True) or (Y[i] = True)) then
-    begin
-      res[i] := True;
-    end;
-  end;
-  Union := res;
+  x[GetCharIndex(ch)] := False;
 end;
 
-function Intersection(const X, Y: TCharSet): TCharSet;
-var
-  res: TCharSet;
-  i: Integer;
+function Contains(const x: TCharSet; ch: Char): Boolean;
 begin
-  Init(res);
-  for i := 1 to ALPHABET_SIZE do
-  begin
-    if ((X[i] = True) and (Y[i] = True)) then
-    begin
-      res[i] := True;
-    end;
-  end;
-  Intersection := res;
-end;
-
-function Difference(const X, Y: TCharSet): TCharSet;
-var
-  res: TCharSet;
-  i: Integer;
-begin
-  Init(res);
-  for i := 1 to ALPHABET_SIZE do
-  begin
-    if ((X[i] = True) and (Y[i] = False)) then
-    begin
-      res[i] := True;
-    end;
-  end;
-  Difference := res;
-end;
-
-function Contains(const X: TCharSet; const ch: Char): Boolean;
-begin
-  Contains := X[GetCharIndex(ch)];
-end;
-
-function ToString(const X: TCharSet): String;
-var
-  res: String;
-  i: Integer;
-begin
-  res := '[';
-  for i := 1 to ALPHABET_SIZE do
-  begin
-    if X[i] = True then
-    begin
-      res += ' ' + GetCharByIndex(i);
-    end;
-  end;
-  res += ' ]';
-  ToString := res;
+  Contains := x[GetCharIndex(ch)];
 end;
 
 end.

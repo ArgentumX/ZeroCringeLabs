@@ -10,14 +10,28 @@ type
 
 procedure Init(var x: TCharSet);
 procedure Add(var x: TCharSet; ch: Char);
+procedure Remove(var x: TCharSet; ch: Char);
 
-function Union(const x, y: TCharSet): TCharSet;
-function Intersection(const x, y: TCharSet): TCharSet;
-function Difference(const x, y: TCharSet): TCharSet;
-function Contains(const x: TCharSet; const ch: Char): Boolean;
-function ToString(const x: TCharSet): String;
+function Contains(const x: TCharSet; ch: Char): Boolean;
 
 implementation 
+
+function GetCharIndex(var x: TCharSet; ch: Char): Integer;
+var
+  i: Integer;
+  flag: Boolean;
+begin
+  i := 0;
+  flag := False;
+  while (i < x.n) and (not flag) do
+  begin
+    if (x.arr[i] = ch) then
+    begin
+      GetCharIndex := i;
+      flag := True;
+    end;
+  end;
+end;
 
 procedure Init(var x: TCharSet);
 begin
@@ -35,56 +49,17 @@ begin
   end;
 end;
 
-function Union(const x, y: TCharSet): TCharSet;
-var
-  res: TCharSet;
-  i: Integer;
+procedure Remove(var x: TCharSet; ch: Char);
 begin
-  Init(res);
-  for i := 0 to (x.n - 1) do
+  if Contains(x, ch) then
   begin
-    Add(res, x.arr[i]);
+    x.arr[x.n - 1] := x.arr[GetCharIndex(x, ch)];
+    x.n -= 1;
+    SetLength(x.arr, x.n);
   end;
-  for i := 0 to (y.n - 1) do
-  begin
-    Add(res, y.arr[i]);
-  end;
-  Union := res;
 end;
 
-function Intersection(const x, y: TCharSet): TCharSet;
-var
-  res: TCharSet;
-  i: Integer;
-begin
-  Init(res);
-  for i := 0 to (x.n - 1) do
-  begin
-    if Contains(y, x.arr[i]) then
-    begin
-      Add(res, x.arr[i]);
-    end;
-  end;
-  Intersection := res;
-end;
-
-function Difference(const x, y: TCharSet): TCharSet;
-var
-  res: TCharSet;
-  i: Integer;
-begin
-  Init(res);
-  for i := 0 to (x.n - 1) do
-  begin
-    if not Contains(y, x.arr[i]) then
-    begin
-      Add(res, x.arr[i]);
-    end;
-  end;
-  Difference := res;
-end;
-
-function Contains(const x: TCharSet; const ch: Char): Boolean;
+function Contains(const x: TCharSet; ch: Char): Boolean;
 var
   i: Integer;
   flag: Boolean;
@@ -100,23 +75,6 @@ begin
     i += 1;
   end;
   Contains := flag;
-end;
-
-function ToString(const x: TCharSet): String;
-var
-  res: String;
-  i: Integer;
-begin
-  res := '[';
-  for i := ord('0') to ord('z') do
-  begin
-    if Contains(x, chr(i)) then
-    begin
-      res += ' ' + chr(i);
-    end;
-  end;
-  res += ' ]';
-  ToString := res;
 end;
 
 end.

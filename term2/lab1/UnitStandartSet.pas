@@ -7,12 +7,9 @@ type
 
 procedure Init(var x: TCharSet);
 procedure Add(var x: TCharSet; ch: Char);
+procedure Remove(var x: TCharSet; ch: Char);
 
-function Union(const x, y: TCharSet): TCharSet;
-function Intersection(const x, y: TCharSet): TCharSet;
-function Difference(const x, y: TCharSet): TCharSet;
-function Contains(const x: TCharSet; const ch: Char): Boolean;
-function ToString(const x: TCharSet): String;
+function Contains(const x: TCharSet; ch: Char): Boolean;
 
 implementation 
 
@@ -26,41 +23,14 @@ begin
   X += [ch];
 end;
 
-function Union(const X, Y: TCharSet): TCharSet;
+procedure Remove(var x: TCharSet; ch: Char);
 begin
-  Union := X + Y;
+  Exclude(x, ch);
 end;
 
-function Intersection(const X, Y: TCharSet): TCharSet;
-begin
-  Intersection := X * Y;
-end;
-
-function Difference(const X, Y: TCharSet): TCharSet;
-begin
-  Difference := X - Y;
-end;
-
-function Contains(const X: TCharSet; const ch: Char): Boolean;
+function Contains(const X: TCharSet; ch: Char): Boolean;
 begin
   Contains := ch in X;
-end;
-
-function ToString(const X: TCharSet): String;
-var
-  res: String;
-  i: Integer;
-begin
-  res := '[';
-  for i := ord('0') to ord('z') do
-  begin
-    if Contains(x, chr(i)) then
-    begin
-      res += ' ' + chr(i);
-    end;
-  end;
-  res += ' ]';
-  ToString := res;
 end;
 
 end.
