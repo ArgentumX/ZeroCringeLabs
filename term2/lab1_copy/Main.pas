@@ -2,14 +2,14 @@
 
 uses UnitCharArraySet, UnitLogger;
 
-procedure ReadSet(var fin: TextFile; var X: TCharSet);
+procedure ReadSet(var fin: TextFile; var x: TCharSet);
 var ch: Char;
 begin
-    Init(X);
+    Init(x);
     while not eoln(fin) do
     begin
       read(fin, ch);
-      Add(X, ch);
+      Add(x, ch);
     end;
     readln(fin);
 end;
@@ -36,12 +36,13 @@ var
   i: Integer;
 begin
   Log('start new union operation', '');
-  Init(z);
+  Log('[union] copy x1 set', '');
+  Copy(x1, z);
   for i := ord('0') to ord('z') do
   begin
-    if (Contains(x1, chr(i)) or Contains(x2, chr(i))) then
+    if Contains(x2, chr(i)) then
     begin
-      Log('union add: ', chr(i));
+      Log('[union] add: ', chr(i));
       Add(z, chr(i));
     end;
   end;
@@ -52,13 +53,14 @@ var
   i: Integer;
 begin
   Log('start new intersection operation', '');
-  Init(z);
+  Log('[intersection] copy x1 set', '');
+  Copy(x1, z);
   for i := ord('0') to ord('z') do
   begin
-    if (Contains(x1, chr(i)) and Contains(x2, chr(i))) then
+    if not Contains(x2, chr(i)) then
     begin
-      Log('intersection add: ', chr(i));
-      Add(z, chr(i));
+      Log('[intersection] remove: ', chr(i));
+      Remove(z, chr(i));
     end;
   end;
 end;
@@ -68,13 +70,14 @@ var
   i: Integer;
 begin
   Log('start new difference operation', '');
-  Init(z);
+  Log('[difference] copy x1 set', '');
+  Copy(x1, z);
   for i := ord('0') to ord('z') do
   begin
-    if (Contains(x1, chr(i)) and not Contains(x2, chr(i))) then
+    if Contains(x2, chr(i)) then
     begin
-      Log('difference add: ', chr(i));
-      Add(z, chr(i));
+      Log('[difference] remove: ', chr(i));
+      Remove(z, chr(i));
     end;
   end;
 end;
