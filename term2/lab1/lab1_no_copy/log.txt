@@ -1,0 +1,35 @@
+start new union operation
+union add: 1
+union add: 2
+union add: A
+union add: B
+union add: a
+union add: b
+union add: c
+union add: d
+union add: e
+union add: f
+union add: g
+union add: k
+start new intersection operation
+intersection add: a
+intersection add: b
+start new difference operation
+difference add: A
+difference add: c
+difference add: d
+difference add: e
+difference add: f
+difference add: g
+start new difference operation
+difference add: j
+difference add: k
+start new union operation
+union add: A
+union add: c
+union add: d
+union add: e
+union add: f
+union add: g
+union add: j
+union add: k

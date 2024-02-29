@@ -1,0 +1,101 @@
+start new union operation
+[union] copy x1 set
+[union] add: 1
+[union] add: 2
+[union] add: B
+[union] add: a
+[union] add: b
+[union] add: k
+start new intersection operation
+[intersection] copy x1 set
+[intersection] remove: 0
+[intersection] remove: 3
+[intersection] remove: 4
+[intersection] remove: 5
+[intersection] remove: 6
+[intersection] remove: 7
+[intersection] remove: 8
+[intersection] remove: 9
+[intersection] remove: :
+[intersection] remove: ;
+[intersection] remove: <
+[intersection] remove: =
+[intersection] remove: >
+[intersection] remove: ?
+[intersection] remove: @
+[intersection] remove: A
+[intersection] remove: C
+[intersection] remove: D
+[intersection] remove: E
+[intersection] remove: F
+[intersection] remove: G
+[intersection] remove: H
+[intersection] remove: I
+[intersection] remove: J
+[intersection] remove: K
+[intersection] remove: L
+[intersection] remove: M
+[intersection] remove: N
+[intersection] remove: O
+[intersection] remove: P
+[intersection] remove: Q
+[intersection] remove: R
+[intersection] remove: S
+[intersection] remove: T
+[intersection] remove: U
+[intersection] remove: V
+[intersection] remove: W
+[intersection] remove: X
+[intersection] remove: Y
+[intersection] remove: Z
+[intersection] remove: [
+[intersection] remove: \
+[intersection] remove: ]
+[intersection] remove: ^
+[intersection] remove: _
+[intersection] remove: `
+[intersection] remove: c
+[intersection] remove: d
+[intersection] remove: e
+[intersection] remove: f
+[intersection] remove: g
+[intersection] remove: h
+[intersection] remove: i
+[intersection] remove: j
+[intersection] remove: l
+[intersection] remove: m
+[intersection] remove: n
+[intersection] remove: o
+[intersection] remove: p
+[intersection] remove: q
+[intersection] remove: r
+[intersection] remove: s
+[intersection] remove: t
+[intersection] remove: u
+[intersection] remove: v
+[intersection] remove: w
+[intersection] remove: x
+[intersection] remove: y
+[intersection] remove: z
+start new difference operation
+[difference] copy x1 set
+[difference] remove: 1
+[difference] remove: 2
+[difference] remove: B
+[difference] remove: a
+[difference] remove: b
+[difference] remove: k
+start new difference operation
+[difference] copy x1 set
+[difference] remove: A
+[difference] remove: a
+[difference] remove: b
+[difference] remove: c
+[difference] remove: d
+[difference] remove: e
+[difference] remove: f
+[difference] remove: g
+start new union operation
+[union] copy x1 set
+[union] add: j
+[union] add: k
