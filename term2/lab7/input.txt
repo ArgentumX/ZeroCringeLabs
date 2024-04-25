@@ -1,0 +1,8 @@
+A-33-23,Ivanov Ivan,2005,M,5,5,5,1000
+A-34-23,Sidorov Dmitrioy,2005,M,5,4,5,1500
+A-33-23,Petrova Yulia,976,F,5,5,5,1500
+A-33-23,Nikolaeva Yulia,2000,F,4,4,4,1200
+A-33-23,Aikolaeva Katherine,2000,F,4,4,4,1200
+A-34-23,Kuznecov Maksim,2005,M,3,3,3,1200
+A-34-23,Kalkov Ivan,2005,M,3,3,3,1300
+A-34-23,Ravitskaya Svetlana,2001,F,5,5,5,1500
