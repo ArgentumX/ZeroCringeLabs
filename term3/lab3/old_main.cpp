@@ -8,15 +8,10 @@ using namespace std;
 
 const int recordSize = 6;
 
-struct Record
-{
-    char *chars = (char *)malloc(sizeof(char) * recordSize);
-};
-
 void createBinFile(char *inputFName, char *binFName);
 void ReadAndWriteBinFile(char *fname, char *comment);
 int swap(char *fname, int swapA, int swapB);
-void WriteArray(Record record);
+void WriteArray(char record[]);
 int swap(char *fname, int swapA, int swapB);
 
 int main(int argc, char *argv[])
@@ -54,39 +49,39 @@ void createBinFile(char *inputFName, char *binFName)
 
     for (int i = 0; i < n; i++)
     {
-        Record record;
+        char record[recordSize];
         for (int j = 0; j < recordSize; j++)
         {
-            if (fscanf(file, "%s", &record.chars[j]) < 1)
+            if (fscanf(file, "%s", &record[j]) < 1)
             {
                 printf("Ошибка чтения из файла '%s'\n", inputFName);
                 fclose(file);
                 return;
             }
         }
-        fout.write((char *)(&record), sizeof(Record));
+        fout.write(record, sizeof(record));
     }
     fout.close();
     fclose(file);
 }
-void WriteArray(Record record)
+void WriteArray(char record[])
 {
     for (int z = 0; z < recordSize; z++)
     {
-        cout << record.chars[z] << " ";
+        cout << record[z] << " ";
     }
 }
 void ReadAndWriteBinFile(char *fname, char *comment)
 {
     FILE *fin = fopen(fname, "r");
     fseek(fin, 0, SEEK_END);
-    int recordAmount = ftell(fin) / sizeof(Record);
-    Record record;
+    int recordAmount = ftell(fin) / recordSize;
+    char record[recordSize];
     fseek(fin, 0, SEEK_SET);
     printf(comment);
     for (int i = 0; i < recordAmount; i++)
     {
-        fread(&record, sizeof(Record), 1, fin);
+        fread(record, sizeof(char), recordSize, fin);
         WriteArray(record);
         printf("\n");
     }
@@ -94,23 +89,24 @@ void ReadAndWriteBinFile(char *fname, char *comment)
 }
 int swap(char *fname, int swapA, int swapB)
 {
-    Record recordA, recordB;
+    char recordA[recordSize], recordB[recordSize];
     FILE *fin = fopen(fname, "r+");
     fseek(fin, 0, SEEK_END);
-    int recordsAmount = ftell(fin) / sizeof(Record);
+    int size = ftell(fin);
+    int recordsAmount = size / recordSize;
     fseek(fin, 0, SEEK_SET);
     if (swapA >= recordsAmount || swapB >= recordsAmount)
     {
         printf("\nCan't swap: wrong swap indexes\n");
         return 0;
     }
-    fseek(fin, swapA * sizeof(Record), SEEK_SET);
-    fread(&recordA, sizeof(Record), 1, fin);
-    fseek(fin, swapB * sizeof(Record), SEEK_SET);
-    fread(&recordB, sizeof(Record), 1, fin);
-    fseek(fin, swapA * sizeof(Record), SEEK_SET);
-    fwrite((char *)(&recordB), sizeof(Record), 1, fin);
-    fseek(fin, swapB * sizeof(Record), SEEK_SET);
-    fwrite((char *)(&recordA), sizeof(Record), 1, fin);
+    fseek(fin, swapA * recordSize * sizeof(char), SEEK_SET);
+    fread(recordA, sizeof(char), recordSize, fin);
+    fseek(fin, swapB * recordSize * sizeof(char), SEEK_SET);
+    fread(recordB, sizeof(char), recordSize, fin);
+    fseek(fin, swapA * recordSize * sizeof(char), SEEK_SET);
+    fwrite(recordB, sizeof(char), recordSize, fin);
+    fseek(fin, swapB * recordSize * sizeof(char), SEEK_SET);
+    fwrite(recordA, sizeof(char), recordSize, fin);
     fclose(fin);
 }
