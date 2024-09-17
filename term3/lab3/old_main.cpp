@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 {
     int swapA, swapB;
     setlocale(LC_ALL, "rus");
-    if (argc < 3)
+    if (argc < 5)
     {
         printf("Недостаточно параметров!\n");
         return 0;
