@@ -23,8 +23,18 @@ int main(int argc, char *argv[])
         return 0;
     }
     ReadString(argv[1], str, &strLength);
+    if (strLength == 0)
+    {
+        printf("Подана нулевая строка\n");
+        return 0;
+    }
     printf("\nИсходная строка: %s\n", str);
     ReworkString(str, strLength, result, &resultLength);
+    if (resultLength == 0)
+    {
+        printf("Нет слов по условию\n");
+        return 0;
+    }
     printf("\nВыходная строка: %s\n", result);
 }
 
