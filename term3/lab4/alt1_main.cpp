@@ -57,7 +57,7 @@ void ReworkString(char *baseStr, int baseLength, char *result, int *resultLength
     bool foundDouble = false;
     int lastWordLength = 0;
     std::set<char> ascii;
-    for (int i = 0; i < baseLength; i++)
+    for (int i = 0; baseStr[i] != '\0'; i++)
     {
         if (baseStr[i] == ' ')
         {
