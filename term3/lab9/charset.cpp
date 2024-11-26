@@ -83,10 +83,20 @@ int CharSet::getSize() const
 }
 bool CharSet::contains(char s) const
 {
+    if (!(this->isPossibleChar)(s))
+    {
+        std::cout << "Not allowed symbol" << std::endl;
+        return;
+    }
     return this->table[getTableIdByAsciiId(s)];
 }
 void CharSet::add(char s)
 {
+    if (!(this->isPossibleChar)(s))
+    {
+        std::cout << "Not allowed symbol" << std::endl;
+        return;
+    }
     if ((this->contains)(s))
     {
         std::cout << "Already contains " << s << std::endl;
@@ -97,6 +107,11 @@ void CharSet::add(char s)
 
 void CharSet::remove(char s)
 {
+    if (!(this->isPossibleChar)(s))
+    {
+        std::cout << "Not allowed symbol" << std::endl;
+        return;
+    }
     if (!(this->contains)(s))
     {
         std::cout << "Already not contains " << s << std::endl;
