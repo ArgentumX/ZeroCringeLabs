@@ -8,6 +8,11 @@ int main()
     std::cout << "Enter A char setup: ";
     std::cin >> s1;
     CharSet a = CharSet(s1);
+    
+    std::string str = "FRIEND FUNCTIONS";
+    // CharSet result = a + str; // possible bcs str casts to CharSet and '+' operator defined for CharSet 
+    // CharSet result = str + a; // '+' CharSet is not defined for String class
+
     std::cout << "Enter B char setup: ";
     std::cin >> s2;
     CharSet b = CharSet(s2);
