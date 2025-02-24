@@ -1,2 +1,4 @@
 *output.txt
 *.pcu
+Win32
+*.local
