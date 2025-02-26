@@ -14,23 +14,23 @@
 	)
 )
 
-(defun gcd (lambda (a b)
+(defun cgcd(a b)
 	(cond 
 	((= b 0) a)
 
     (t (gcd b (mod a b)))
 	)
-))
+)
 
-(defun lcm (lambda (a b)
+(defun clcm(a b)
 	(/ (* a b) (gcd a b))
-))
+)
 
 
-(defun sqrt (n iterations)
+(defun csqrt(n iterations)
 	(cond
 		((= iterations 0) (* 0.5 (+ 1 n)))
-		((plusp iterations) (setq x (sqr n (- iterations 1))) (* 0.5 (+ x (/ n x))))
+		((plusp iterations) (setq x (sqrt n (- iterations 1))) (* 0.5 (+ x (/ n x))))
 	)
 )
 
