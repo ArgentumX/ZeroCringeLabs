@@ -9,6 +9,9 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
+#include <vector>
+using namespace std;
+
 TForm1 *Form1;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -18,53 +21,26 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 }
 void TForm1::UpdateMatrixView(){
 	SG->RowCount = matrixSize;
-	SG->ColCount = matrixSize;
-   	for (int i = 0; i < matrixSize; i++) {
+	SG->ColCount = matrixSize;;
+	for (int i = 0; i < matrixSize; i++) {
 		for (int j = 0; j < matrixSize; j++) {
-			SG->Cells[j][i] = i+j;
+			SG->Cells[j][i] = i+j ;
 		}
 	}
+	UpdateMatrixBackend();
 }
 
-int TForm1::GetColNullCount(int j){
-	int count = 0;
+void TForm1::UpdateMatrixBackend(){
+	vector<vector<int>> matr = vector<vector<int>>(matrixSize, vector<int>(matrixSize, 0)) ;
 	for (int i = 0; i < matrixSize; i++) {
-		if (SG->Cells[j][i] == 0) {
-				count++;
+		for (int j = 0; j < matrixSize; j++) {
+			matr[i][j] = StrToInt(SG->Cells[j][i]);
 		}
 	}
-	return count;
+	matrix = Matrix(matr);
+	matrix.display() ;
 }
-int TForm1::GetMatrixNullCount() {
-	int count = 0;
-	for (int i = 0; i < matrixSize; i++) {
-		count += GetColNullCount(i);
-	}
-	return count;
-}
-int TForm1::GetMaxNullCol(){
-	int col_index = 0;
-	int col_val = GetColNullCount(0);
-	for (int i = 1; i < matrixSize; i++) {
-		int val = GetColNullCount(i);
-		if(col_val < val){
-			col_val = val;
-			col_index = i;
-		}
-	}
-	return col_index;
-}
-bool TForm1::IsMatrixOrdered(){
-	int prevVal = GetColNullCount(0);
-	for (int i = 1; i < matrixSize; i++) {
-		int val = GetColNullCount(i);
-		if (val < prevVal) {
-			return false;
-		}
-		prevVal = val;
-	}
-	return true;
-}
+
 //---------------------------------------------------------------------------
 void __fastcall TForm1::MatrixSizeChange(TObject *Sender)
 {
@@ -73,21 +49,30 @@ void __fastcall TForm1::MatrixSizeChange(TObject *Sender)
 		Label1 -> Caption = "validation error";
 		return;
 	}
+	Label1 -> Caption = "Matrix size:";
 	UpdateMatrixView();
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::CheckClick(TObject *Sender)
 {
-	if (IsMatrixOrdered()) {
-		Label2 -> Caption = "Nulls Count = " + IntToStr(GetMatrixNullCount());
+	if (matrix.isNullOrdered()) {
+		Label2 -> Caption = "Nulls Count = " + IntToStr(matrix.getNullCount());
 	}
 	else {
-		Label2 -> Caption = "Max Null col = " + IntToStr(GetMaxNullCol());
+		Label2 -> Caption = "Max Null col = " + IntToStr(matrix.getMaxNullCol());
 	}
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Button1Click(TObject *Sender)
 {
-Close() ;
+	Close();
 }
 //---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::SGExit(TObject *Sender)
+{
+	UpdateMatrixBackend();
+}
+//---------------------------------------------------------------------------
+

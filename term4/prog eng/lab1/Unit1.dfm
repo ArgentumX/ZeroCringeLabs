@@ -48,6 +48,7 @@ object Form1: TForm1
     ParentShowHint = False
     ShowHint = False
     TabOrder = 0
+    OnExit = SGExit
   end
   object MatrixSize: TEdit
     Left = 128

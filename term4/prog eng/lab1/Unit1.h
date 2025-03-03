@@ -8,6 +8,7 @@
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
 #include <Vcl.Grids.hpp>
+#include "Matrix.h"
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -21,15 +22,14 @@ __published:	// IDE-managed Components
 	void __fastcall MatrixSizeChange(TObject *Sender);
 	void __fastcall CheckClick(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall SGExit(TObject *Sender);
 private:	// User declarations
 	int matrixSize = 3;
+	Matrix matrix = Matrix(matrixSize, matrixSize);
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
 	void UpdateMatrixView();
-	bool IsMatrixOrdered();
-	int GetMaxNullCol();
-	int GetMatrixNullCount();
-	int GetColNullCount(int j);
+	void UpdateMatrixBackend();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm1 *Form1;
