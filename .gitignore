@@ -2,3 +2,4 @@
 *.pcu
 Win32
 *.local
+.vscode/settings.json
