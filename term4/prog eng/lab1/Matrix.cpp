@@ -66,3 +66,63 @@ void Matrix::display() const {
     }
 }
 
+
+// Lab 2
+
+int Matrix::getRowSum(int i) const {
+	int result = 0;
+	if (i < 0 || i >= data.size()) {
+		return 0;
+	}
+	for (int j = 0; j < data[i].size(); j++) {
+		result += data[i][j];
+	}
+	return result;
+}
+
+int Matrix::getRowNulls(int i) const {
+	int result = 0;
+
+	if (i < 0 || i >= data.size()) {
+		return 0;
+	}
+
+	for (int j = 0; j < data[i].size(); j++) {
+		if (data[i][j] == 0) {
+			result++;
+		}
+	}
+
+	return result;
+}
+float Matrix::getCoff() const {
+	int evenSum = 0;
+	int oddSum = 0;
+
+	for (int i = 0; i < data.size(); i++) {
+		int rowSum = getRowSum(i);
+		if (i % 2 == 0) {
+			evenSum += rowSum;
+		} else {
+			oddSum += rowSum;
+		}
+	}
+	if (oddSum == 0) {
+		return 0; ;
+	}
+
+	return static_cast<float>(evenSum) / oddSum;
+}
+
+int Matrix::getEvenRowsNulls() const {
+	int result = 0;
+
+	for (int i = 0; i < data.size(); i++) {
+		if (i % 2 == 0) {
+			result += getRowNulls(i);
+		}
+	}
+
+	return result;
+}
+
