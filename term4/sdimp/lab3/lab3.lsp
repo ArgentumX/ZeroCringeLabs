@@ -34,7 +34,7 @@
 
 
 ; 14
-(defun intersection (l1 l2)
+(defun intersect (l1 l2)
   (let ((resl '())) 
     (dolist (a l1)  
       (when (member a l2)  
@@ -49,3 +49,19 @@
 (defun sum (A1 A2 N list)
   (cond ((eq N 0) list)
         (t (sum A2 (+ A1 A2) (- N 1) (cons A1 list)))))
+
+
+(print "TASK 11:")
+(print (primes 18))
+
+(print "TASK 12:")
+(print (revlist `(A B (C B (D A)))))
+
+(print "TASK 13:")
+(print (linear `(A B (C D))))
+
+(print "TASK 14:")
+(print (intersect `(A B C) `(A B)))
+
+(print "TASK 15:")
+(print (fib 5))
