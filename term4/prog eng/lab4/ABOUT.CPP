@@ -7,21 +7,16 @@
 #pragma resource "*.dfm"
 TAboutBox *AboutBox;
 //--------------------------------------------------------------------- 
-__fastcall TAboutBox::TAboutBox(TComponent* AOwner)
-	: TForm(AOwner)
+__fastcall TAboutBox::TAboutBox(TComponent *Owner)
+	: TForm(Owner)
 {
 }
 //---------------------------------------------------------------------
 void __fastcall TAboutBox::OKButtonClick(TObject *Sender)
 {
-	Close();
+    Close();
 }
 //---------------------------------------------------------------------------
 
 
-void __fastcall TAboutBox::FormClose(TObject *Sender, TCloseAction &Action)
-{
-	 Action = caFree;
-}
-//---------------------------------------------------------------------------
 

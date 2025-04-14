@@ -1,34 +1,43 @@
 object AboutBox: TAboutBox
-  Left = 200
+  Left = 243
   Top = 108
+  Margins.Left = 2
+  Margins.Top = 2
+  Margins.Right = 2
+  Margins.Bottom = 2
+  ActiveControl = OKButton
   BorderStyle = bsDialog
   Caption = 'About'
-  ClientHeight = 213
-  ClientWidth = 298
+  ClientHeight = 214
+  ClientWidth = 297
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
+  Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  FormStyle = fsMDIForm
   Position = poScreenCenter
-  OnClose = FormClose
   TextHeight = 13
   object Panel1: TPanel
     Left = 8
     Top = 8
-    Width = 281
-    Height = 161
-    BevelInner = bvRaised
+    Width = 277
+    Height = 158
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     BevelOuter = bvLowered
-    ParentColor = True
     TabOrder = 0
     object ProgramIcon: TImage
-      Left = 18
-      Top = 16
-      Width = 96
-      Height = 94
+      Left = 8
+      Top = 8
+      Width = 64
+      Height = 56
+      Margins.Left = 2
+      Margins.Top = 2
+      Margins.Right = 2
+      Margins.Bottom = 2
       Picture.Data = {
         0A544A504547496D616765F2140000FFD8FFE000104A46494600010100000100
         010000FFDB0084000906071313121513131315161517181718171818171A181A
@@ -199,35 +208,47 @@ object AboutBox: TAboutBox
         B9AE5C95A66F1DFE0F737DCFBAC3FEB9FB2E5CB92E4F3AF9FE8F48CF97B2F262
         65CD55C9C361FC9FE0C9DFB1E1F0BDA7F45CB96B3E0EDFA9B325CB972C9D8FFF
         D9}
-      Stretch = True
       IsControl = True
     end
     object ProductName: TLabel
-      Left = 120
-      Top = 29
-      Width = 29
+      Left = 8
+      Top = 72
+      Width = 94
       Height = 13
-      Caption = 'LAB 3'
+      Margins.Left = 2
+      Margins.Top = 2
+      Margins.Right = 2
+      Margins.Bottom = 2
+      Caption = 'Product Name: lab4'
       IsControl = True
     end
     object Version: TLabel
-      Left = 120
-      Top = 48
+      Left = 8
+      Top = 95
       Width = 47
       Height = 13
-      Caption = 'Version -1'
+      Margins.Left = 2
+      Margins.Top = 2
+      Margins.Right = 2
+      Margins.Bottom = 2
+      Caption = 'Version: 1'
       IsControl = True
     end
   end
   object OKButton: TButton
-    Left = 111
-    Top = 180
-    Width = 75
-    Height = 25
+    Left = 118
+    Top = 175
+    Width = 64
+    Height = 33
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
     Caption = 'OK'
     Default = True
     ModalResult = 1
     TabOrder = 1
     OnClick = OKButtonClick
+    IsControl = True
   end
 end
