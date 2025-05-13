@@ -1,31 +1,63 @@
-(defun @printmixt (list1 list2)
-  ;; Печатает элементы LIST1 с префиксом из LIST2. Если LIST2 короче, он повторяется.
-  (unless (and (listp list1) (listp list2))
-    (error "@PRINTMIXT: оба аргумента должны быть списками"))
-  (when (and (null list1) (null list2))
-    (error "@PRINTMIXT: список LIST1 не должен быть пустым"))
-  (let ((prefix-list list2)
-        (current-prefixes list2))
-    (dolist (item list1)
-      (when (null current-prefixes)
-        (setf current-prefixes prefix-list)) ; повторяем list2
-      (format t "~A~A " (car current-prefixes) item)
-      (setf current-prefixes (cdr current-prefixes))))
-    t  
+(PASSERTQ ADD-UNDER ()
+	(FPUT :VALUE UNDER $VALUE :FRAME)
+)
+
+
+(PASSERTQ REMOVE-TOP ()
+	(FDELETE :VALUE TOP $VALUE :FRAME)
+)
+
+
+(DEFUN PUT-ON (object1 object2)
+  (COND 
+    ((OR 
+       (NULL object1)
+       (NULL object2)
+       (equal (car objebject2))  ; нельзя положить объект на самого себя
+       (NOT (NULL (FGET object1 TOP)))      ; object1 уже на чем-то стоит
+       (AND 
+         (NOT (NULL (FGET object2 TOP)))    ; object2 уже имеет кого-то сверху
+         (NULL (MEMBER object1 (FGET object2 TOP))) ; и object1 не является этим объектом
+       )
+     ) NIL)
+    (T 
+     (
+       (FREMOVE object1 UNDER $VALUE (CAR (FGET object1 UNDER))) ; удалить object1 из прежнего основания
+       (FPUT object2 TOP $VALUE object1) ; положить object1 на object2
+       T
+     )
     )
+  )
+)
 
-(print "Тест 1: Обычный случай")
-(terpri)
-(print (@printmixt '(1 2 3 4 5 6 7) '(A B C D))) ; => A1 B2 C3 D4 A5 B6 C7
+(DEFRAMEQ TOWER
+	(TOP ($IF-ADDED (ADD-UNDER (STATUS: EVAL)))) 
+	(UNDER ($IF-REMOVED (REMOVE-TOP (STATUS: EVAL)))) 
+)
 
-(print "Тест 2: list2 короче list1")
-(terpri)
-(print (@printmixt '(10 20 30 40 50) '(X Y))) ; => X10 Y20 X30 Y40 X50
+(DEFRAMEQ CUBE
+	(REL	($VALUE TOWER))
+	(TOP 	($VALUE()))
+	(UNDER	($VALUE()))
+)
 
-(print "Тест 3: list2 длиннее list1")
-(terpri)
-(print (@printmixt '(a b) '(1 2 3 4 5))) ; => 1a 2b
 
-(print "Тест 4: list1 и list2 одинаковой длины")
-(terpri)
-(print (@printmixt '(cat dog mouse) '(meow bark squeak))) ; => meowcat barkdog squeakmouse
+(DEFRAMEQ SPHERE
+	(REL	($VALUE TOWER))
+	(TOP 	($VALUE()))
+	(UNDER	($VALUE()))
+)
+
+
+(DEFRAMEQ PIRAMID
+	(REL	($VALUE TOWER))
+	(TOP 	($VALUE()))
+	(UNDER	($VALUE()))
+)
+
+
+(DEFRAMEQ PLANE
+	(REL	($VALUE TOWER))
+	(TOP 	($VALUE()))
+	(UNDER	($VALUE()))
+)
